@@ -1,0 +1,28 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    mainClassName = 'bke.rtwp.MainKt'
+    gdxVersion = '1.9.10'
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib"
+    compile "org.jetbrains.kotlin:kotlin-reflect"
+
+    compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+    compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+}
+
+task run(dependsOn: classes, type: JavaExec) {
+    main = project.mainClassName
+    classpath = sourceSets.main.runtimeClasspath
+    ignoreExitValue = true
+}

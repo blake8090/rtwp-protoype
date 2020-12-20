@@ -1,0 +1,14 @@
+build/
+out/
+
+## Java
+*.class
+hs_err_pid*
+
+## Gradle
+/local.properties
+.gradle/
+
+## Intellij
+.idea/
+*.iml
