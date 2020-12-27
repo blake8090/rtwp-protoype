@@ -1,12 +1,11 @@
 package bke.rtwp
 
 import bke.rtwp.actor.Player
+import bke.rtwp.event.AttackEvent
+import bke.rtwp.event.AttackEventProcessor
 import bke.rtwp.event.MoveEvent
 import bke.rtwp.event.MoveEventProcessor
-import bke.rtwp.system.InputSystem
-import bke.rtwp.system.MovementSystem
-import bke.rtwp.system.RenderSystem
-import bke.rtwp.system.System
+import bke.rtwp.system.*
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
 
@@ -15,10 +14,13 @@ class Game : ApplicationAdapter() {
     private val systems = LinkedHashSet<System>()
 
     override fun create() {
+        // todo: auto-add these through annotation scanning
         context.eventEngine.add(MoveEvent::class, MoveEventProcessor())
+        context.eventEngine.add(AttackEvent::class, AttackEventProcessor())
 
         systems.add(InputSystem())
         systems.add(MovementSystem())
+        systems.add(ActionSystem())
         systems.add(RenderSystem())
         systems.forEach(System::init)
 

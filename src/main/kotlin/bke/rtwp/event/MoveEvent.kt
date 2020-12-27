@@ -14,6 +14,10 @@ class MoveEventProcessor : EventProcessor<MoveEvent> {
         val map = context.gameModel.map
         val actor = event.target
 
+        if (actor.action != null) {
+            return
+        }
+
         val tileX = actor.x + event.dx
         val tileY = actor.y + event.dy
 

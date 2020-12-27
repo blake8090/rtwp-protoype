@@ -12,6 +12,8 @@ open class Actor {
     var textureName = ""
 
     var speed: Float = 0f
+
+    var action: Action? = null
 }
 
 class Player : Actor()

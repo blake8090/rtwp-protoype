@@ -1,7 +1,9 @@
 package bke.rtwp.system
 
 import bke.rtwp.Context
+import bke.rtwp.actor.Action
 import bke.rtwp.actor.Player
+import bke.rtwp.event.AttackEvent
 import bke.rtwp.event.MoveEvent
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
@@ -14,6 +16,10 @@ class InputSystem : System() {
 
         var dx = 0
         var dy = 0
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A) && player.action == null) {
+            player.action = Action(AttackEvent(), 0.2f)
+        }
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             dy = 1
