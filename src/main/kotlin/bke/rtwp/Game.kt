@@ -1,5 +1,10 @@
 package bke.rtwp
 
+import bke.rtwp.actor.Player
+import bke.rtwp.event.MoveEvent
+import bke.rtwp.event.MoveEventProcessor
+import bke.rtwp.system.InputSystem
+import bke.rtwp.system.MovementSystem
 import bke.rtwp.system.RenderSystem
 import bke.rtwp.system.System
 import com.badlogic.gdx.ApplicationAdapter
@@ -10,6 +15,10 @@ class Game : ApplicationAdapter() {
     private val systems = LinkedHashSet<System>()
 
     override fun create() {
+        context.eventEngine.add(MoveEvent::class, MoveEventProcessor())
+
+        systems.add(InputSystem())
+        systems.add(MovementSystem())
         systems.add(RenderSystem())
         systems.forEach(System::init)
 
@@ -19,7 +28,15 @@ class Game : ApplicationAdapter() {
             loadTexture("data/circle.png")
             loadTexture("data/enemy.png")
             loadTexture("data/box.png")
+            loadTexture("data/square.png")
         }
+
+        context.gameModel.actors.add(
+                Player().apply {
+                    textureName = "data/circle.png"
+                    speed = 200f
+                }
+        )
     }
 
     override fun render() {
